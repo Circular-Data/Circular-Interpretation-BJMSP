@@ -1,0 +1,21 @@
+> sessionInfo()
+R version 3.3.1 (2016-06-21)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows >= 8 x64 (build 9200)
+
+locale:
+[1] LC_COLLATE=Dutch_Netherlands.1252  LC_CTYPE=Dutch_Netherlands.1252    LC_MONETARY=Dutch_Netherlands.1252
+[4] LC_NUMERIC=C                       LC_TIME=Dutch_Netherlands.1252    
+
+attached base packages:
+[1] grid      stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] dplyr_0.5.0        MASS_7.3-45        Cairo_1.5-9        plotrix_3.6-2      circular_0.4-7    
+ [6] zoo_1.7-13         Rcpp_0.12.6        extrafont_0.17     RColorBrewer_1.1-2 ggplot2_2.1.0     
+[11] matrixStats_0.50.2
+
+loaded via a namespace (and not attached):
+ [1] lattice_0.20-33  assertthat_0.1   R6_2.1.2         plyr_1.8.3       DBI_0.4-1        Rttf2pt1_1.3.4  
+ [7] gtable_0.2.0     magrittr_1.5     scales_0.4.0     extrafontdb_1.0  boot_1.3-18      tools_3.3.1     
+[13] munsell_0.4.3    rsconnect_0.4.3  colorspace_1.2-6 tibble_1.0    
