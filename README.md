@@ -1,4 +1,4 @@
-# Circular-Interpretation-BJSMP
+# Circular-Interpretation-BJMSP
 Data archive for the paper: Circular Interpretation of projected normal regression coefficients
 
 This repository contains all code and supplementary material for the paper:
