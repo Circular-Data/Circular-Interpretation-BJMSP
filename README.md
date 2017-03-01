@@ -8,7 +8,7 @@ Circular Interpretation of projected normal regression coefficients.
 The folder:
 	
 	-Manuscript includes the final manuscript and all figures used in the manuscript.
-	 Note that not all figure code is contained here. For some figures code can be 
+	 Note that not all figure code is contained in this folder. For some figures code can be 
 	 found in other folders.
 	 
 	-Mode Finding Algorithms contains code for finding the mode and HPD interval of
