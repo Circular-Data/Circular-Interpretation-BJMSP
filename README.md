@@ -6,6 +6,7 @@ This repository contains all code and supplementary material for the paper:
 Circular Interpretation of projected normal regression coefficients. 
 
 The folder:
+	
 	-Manuscript includes the final manuscript and all figures used in the manuscript.
 	 Note that not all figure code is contained here. For some figures code can be 
 	 found in other folders.
