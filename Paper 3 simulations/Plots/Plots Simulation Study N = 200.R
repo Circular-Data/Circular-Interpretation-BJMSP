@@ -360,6 +360,8 @@ library(RColorBrewer)
 library(extrafont)
 font_install("fontcm")
 loadfonts()
+loadfonts(device = "win")
+par(family = "LM Roman 10")
 
 #Data for crosstabulations 5-7
 Tabulate <- function(x, y){
@@ -424,6 +426,32 @@ dg + theme_classic() +
   xlab("\nTrue SSDO") + ylab("Relative Bias\n")  
 dev.off()
 
+png("Paper 3 simulations/Plots/FigureBiasAcmeasBcBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD  <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+Bias          <- c(abs(Location[,25]) / abs(Location[,7]),
+                   abs(LocationI[,25]) / abs(LocationI[,7]),
+                   abs(Accuracy[,7] - Accuracy[,25]))
+Type          <- as.factor(c(rep("Location", 1056), rep("Accuracy", 144)))
+
+d   <- data.frame(Bias, PopulationSD, Type)
+dg  <- qplot(PopulationSD, Bias, colour = Type, data = d) + ylim(0, 0.8) +
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() +
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        axis.line.y = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))+
+  theme(legend.position = "none",
+        text = element_text(family="LM Roman 10", size = 16), 
+        axis.title.x  = element_text(size = 16),
+        axis.title.y  = element_text(size = 16),
+        plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("Relative Bias\n")  
+dev.off()
+
+
 pdf("Paper 3 simulations/Plots/FigureBiasAcmeasmBcBN.pdf", family = "CM Roman", pointsize = 24)
 PopulationSD  <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
 Bias          <- c(abs(Location[,26]) / abs(Location[,8]),
@@ -441,6 +469,32 @@ dg + theme_classic() +
   theme(legend.position = "none",
         text = element_text(family="CM Roman", size = 24), 
         axis.title.x  = element_text(size = 24),
+        axis.ticks.y  = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title.y  = element_blank(),
+        plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("Relative Bias\n")
+dev.off()
+
+png("Paper 3 simulations/Plots/FigureBiasAcmeasmBcBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD  <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+Bias          <- c(abs(Location[,26]) / abs(Location[,8]),
+                   abs(LocationI[,26]) / abs(LocationI[,8]),
+                   abs(Accuracy[,8] - Accuracy[,26]))
+Type          <- as.factor(c(rep("Location", 1056), rep("Accuracy", 144)))
+
+d   <- data.frame(Bias, PopulationSD, Type)
+dg  <- qplot(PopulationSD, Bias, colour = Type, data = d) + ylim(0, 0.8) +
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() +
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))+
+  theme(legend.position = "none",
+        text = element_text(family="LM Roman 10", size = 16), 
+        axis.title.x  = element_text(size = 16),
         axis.ticks.y  = element_blank(),
         axis.text.y = element_blank(),
         axis.title.y  = element_blank(),
@@ -472,6 +526,32 @@ dg + theme_classic() +
   xlab("\nTrue SSDO") + ylab("Relative Bias\n") 
 dev.off()
 
+png("Paper 3 simulations/Plots/FigureBiasAcmeasBcmXBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD  <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+Bias          <- c(abs(Location[,27]) / abs(Location[,9]),
+                   abs(LocationI[,27]) / abs(LocationI[,9]),
+                   abs(Accuracy[,9] - Accuracy[,27]))
+Type          <- as.factor(c(rep("Location", 1056), rep("Accuracy", 144)))
+
+d   <- data.frame(Bias, PopulationSD, Type)
+dg  <- qplot(PopulationSD, Bias, colour = Type, data = d) + ylim(0, 0.8) +
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() +
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))+
+  theme(legend.position = "none",
+        text = element_text(family="LM Roman 10", size = 16), 
+        axis.title.x  = element_text(size = 16),
+        axis.ticks.y  = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title.y  = element_blank(),
+        plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("Relative Bias\n") 
+dev.off()
+
 pdf("Paper 3 simulations/Plots/FigureCoverageAcmeasBcBN.pdf", family = "CM Roman", pointsize = 24)
 PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
 Cov          <- c(Location[,52], LocationI[,52], Accuracy[,52])
@@ -490,6 +570,29 @@ dg + theme_classic() +
                              axis.title.x  = element_text(size = 24),
                              axis.title.y  = element_text(size = 24),
                              plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("Coverage\n")
+dev.off()
+
+png("Paper 3 simulations/Plots/FigureCoverageAcmeasBcBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+Cov          <- c(Location[,52], LocationI[,52], Accuracy[,52])
+Type         <- as.factor(c(rep("Location",1056), rep("Accuracy",144)))
+
+d <- data.frame(Cov, PopulationSD, Type) 
+dg <- qplot(PopulationSD,Cov, colour = Type, data=d) + ylim(0.85,1) + 
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() + 
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        axis.line.y = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))+
+  theme(legend.position = "none",
+        text=element_text(family="LM Roman 10", size = 16), 
+        axis.title.x  = element_text(size = 16),
+        axis.title.y  = element_text(size = 16),
+        plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
   xlab("\nTrue SSDO") + ylab("Coverage\n")
 dev.off()
 
@@ -514,6 +617,29 @@ dg + theme_classic() + theme(legend.position = "none",
         panel.grid.major.y=element_line(color="grey", size = 0.5))
 dev.off()
 
+png("Paper 3 simulations/Plots/FigureCoverageAcmeasmBcBN.png", 
+    family = "LM Roman 10", width = 5, height = 5, 
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+Cov          <- c(Location[,53], LocationI[,53], Accuracy[,53])
+Type         <- as.factor(c(rep("Location",1056), rep("Accuracy",144)))
+
+d <- data.frame(Cov, PopulationSD, Type) 
+dg <- qplot(PopulationSD,Cov, colour = Type, data=d) + ylim(0.85,1) + 
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() + theme(legend.position = "none",
+                             text=element_text(family="LM Roman 10", size = 16), 
+                             axis.title.x  = element_text(size = 16),
+                             axis.ticks.y  = element_blank(),
+                             axis.text.y = element_blank(),
+                             axis.title.y  = element_blank(),
+                             plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("Coverage\n") +
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))
+dev.off()
+
 pdf("Paper 3 simulations/Plots/FigureCoverageAcmeasBcmXBN.pdf", family = "CM Roman", pointsize = 24)
 PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
 Cov          <- c(Location[,54], LocationI[,54], Accuracy[,54])
@@ -526,6 +652,29 @@ dg <- qplot(PopulationSD,Cov, colour = Type, data=d) + ylim(0.85,1) +
 dg + theme_classic() + theme(legend.position = "none",
                              text=element_text(family="CM Roman", size = 24), 
                              axis.title.x  = element_text(size = 24),
+                             axis.ticks.y  = element_blank(),
+                             axis.text.y = element_blank(),
+                             axis.title.y  = element_blank(),
+                             plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("Coverage\n") +
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))
+dev.off()
+
+png("Paper 3 simulations/Plots/FigureCoverageAcmeasBcmXBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+Cov          <- c(Location[,54], LocationI[,54], Accuracy[,54])
+Type         <- as.factor(c(rep("Location",1056), rep("Accuracy",144)))
+
+d <- data.frame(Cov, PopulationSD, Type) 
+dg <- qplot(PopulationSD,Cov, colour = Type, data=d) + ylim(0.85,1) + 
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() + theme(legend.position = "none",
+                             text=element_text(family="LM Roman 10", size = 16), 
+                             axis.title.x  = element_text(size = 16),
                              axis.ticks.y  = element_blank(),
                              axis.text.y = element_blank(),
                              axis.title.y  = element_blank(),
@@ -557,6 +706,30 @@ dg + theme_classic() + theme(legend.position = "none",
         panel.grid.major.y=element_line(color="grey", size = 0.5))
 dev.off()
 
+png("Paper 3 simulations/Plots/FigureAIWAcmeasBcBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+AIW          <- log(c(abs(Location[,43] - Location[,34]) / abs(Location[,16]),
+                      abs(LocationI[,43] - LocationI[,34]) / abs(LocationI[,16]),
+                      abs(Accuracy[,43] - Accuracy[,34]) / abs(Accuracy[,16])))
+Type         <- as.factor(c(rep("Location", 1056), rep("Accuracy", 144)))
+
+d <- data.frame(AIW, PopulationSD, Type)
+dg <- qplot(PopulationSD, AIW, colour = Type, data = d) + ylim(-3,12) + 
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() + theme(legend.position = "none",
+                             text=element_text(family="LM Roman 10", size = 16), 
+                             axis.title.x  = element_text(size = 16),
+                             axis.title.y  = element_text(size = 16),
+                             plot.margin = unit(c(0,0,0.5,0.5), "cm")) + 
+  xlab("\nTrue SSDO") + ylab("log(AIW)\n") +
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        axis.line.y = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))
+dev.off()
+
 pdf("Paper 3 simulations/Plots/FigureAIWAcmeasmBcBN.pdf", family = "CM Roman", pointsize = 24)
 PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
 AIW          <- log(c(abs(Location[,44] - Location[,35]) / abs(Location[,17]),
@@ -580,6 +753,32 @@ dg + theme_classic() + theme(legend.position = "none",
         panel.grid.major.y=element_line(color="grey", size = 0.5))
 dev.off()
 
+png("Paper 3 simulations/Plots/FigureAIWAcmeasmBcBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+AIW          <- log(c(abs(Location[,44] - Location[,35]) / abs(Location[,17]),
+                      abs(LocationI[,44] - LocationI[,35]) / abs(LocationI[,17]),
+                      abs(Accuracy[,44] - Accuracy[,35]) / abs(Accuracy[,17])))
+Type         <- as.factor(c(rep("Location", 1056), rep("Accuracy", 144)))
+
+d <- data.frame(AIW, PopulationSD, Type)
+dg <- qplot(PopulationSD, AIW, colour = Type, data = d) + ylim(-3,12) + 
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() + theme(legend.position = "none",
+                             text=element_text(family="LM Roman 10", size = 16), 
+                             axis.title.x  = element_text(size = 16),
+                             axis.ticks.y  = element_blank(),
+                             axis.text.y = element_blank(),
+                             axis.title.y  = element_blank(),
+                             plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("log(AIW)\n") +
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))
+dev.off()
+
+
 pdf("Paper 3 simulations/Plots/FigureAIWAcmeasBcmXBN.pdf", family = "CM Roman", pointsize = 24)
 PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
 AIW          <- log(c(abs(Location[,45] - Location[,36]) / abs(Location[,18]),
@@ -594,6 +793,32 @@ dg <- qplot(PopulationSD, AIW, colour = Type, data = d) + ylim(-3,12) +
 dg + theme_classic() + theme(legend.position = "none",
                              text=element_text(family="CM Roman", size = 24), 
                              axis.title.x  = element_text(size = 24),
+                             axis.ticks.y  = element_blank(),
+                             axis.text.y = element_blank(),
+                             axis.title.y  = element_blank(),
+                             plot.margin = unit(c(0,0,0.5,0.5), "cm")) +
+  xlab("\nTrue SSDO") + ylab("log(AIW)\n") + 
+  theme(axis.line.x = element_line(color="black", size = 0.5),
+        panel.grid.major.y=element_line(color="grey", size = 0.5))
+dev.off()
+
+
+png("Paper 3 simulations/Plots/FigureAIWAcmeasBcmXBN.png",
+    family = "LM Roman 10", width = 5, height = 5,
+    units = "in", pointsize = 16, res = 1200)
+PopulationSD <- c(AcmeasLoc[,1], AcmeasLocI[,1], AcmeasA[,1])
+AIW          <- log(c(abs(Location[,45] - Location[,36]) / abs(Location[,18]),
+                      abs(LocationI[,45] - LocationI[,36]) / abs(LocationI[,18]),
+                      abs(Accuracy[,45] - Accuracy[,36]) / abs(Accuracy[,18])))
+Type         <- as.factor(c(rep("Location", 1056), rep("Accuracy", 144)))
+
+d <- data.frame(AIW, PopulationSD, Type)
+dg <- qplot(PopulationSD, AIW, colour = Type, data = d) + ylim(-3,12) + 
+  scale_color_manual(breaks = c("Location", "Accuracy"), values=c("black", "grey"))
+
+dg + theme_classic() + theme(legend.position = "none",
+                             text=element_text(family="LM Roman 10", size = 16), 
+                             axis.title.x  = element_text(size = 16),
                              axis.ticks.y  = element_blank(),
                              axis.text.y = element_blank(),
                              axis.title.y  = element_blank(),
