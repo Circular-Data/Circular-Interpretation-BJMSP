@@ -182,11 +182,30 @@ for(i in 1:4){
 library(extrafont)
 font_install("fontcm")
 loadfonts()
+loadfonts(device = "win")
+par(family = "LM Roman 10")
 
 ######################Posterior Histograms######################################
 
 pdf("Pointing North Data/PostHistBrunye.pdf", height = 9, width = 6,
     family = "CM Roman", pointsize = 12)
+par(mfrow = c(5,2))
+
+hist(B[,1], breaks = 50, xlab = "", main = "Intercept")
+hist(B[,6], breaks = 50, xlab = "", ylab = "", main = "")
+hist(B[,2], breaks = 50, xlab = "", main = "Age")
+hist(B[,7], breaks = 50, xlab = "", ylab = "", main = "")
+hist(B[,3], breaks = 50, xlab = "", main = "Gender")
+hist(B[,8], breaks = 50, xlab = "", ylab = "", main = "")
+hist(B[,4], breaks = 50, xlab = "", main = "Experience")
+hist(B[,9], breaks = 50, xlab = "", ylab = "", main = "")
+hist(B[,5], breaks = 50, xlab = "", main = "SBSOD")
+hist(B[,10], breaks = 50, xlab = "", ylab = "", main = "")
+
+dev.off()
+
+png("Pointing North Data/PostHistBrunye.png", height = 9, width = 6,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
 par(mfrow = c(5,2))
 
 hist(B[,1], breaks = 50, xlab = "", main = "Intercept")
@@ -217,6 +236,20 @@ hist(Results$SD[1001:3000,3], breaks = 50, xlab = "SSDO",  main = "")
 
 dev.off()
 
+png("Pointing North Data/PostHistBrunyecirc.png", height = 9, width = 6,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
+par(mfrow = c(4,2))
+
+hist(Results$Bc[1001:3000,1], breaks = 50, xlab = expression(b[c]), main = "Age")
+hist(Results$Bc[1001:3000,3], breaks = 50, xlab = expression(b[c]),ylab = "", main = "Experience")
+hist(Results$mBc[1001:3000,1], breaks = 50, xlab = "AS",  main = "")
+hist(Results$mBc[1001:3000,3], breaks = 50, xlab = "AS", ylab = "", main = "")
+hist(Results$BcmX[1001:3000,1], breaks = 50, xlab = "SAM",  main = "")
+hist(Results$BcmX[1001:3000,3], breaks = 50, xlab = "SAM", ylab = "", main = "")
+hist(Results$SD[1001:3000,1], breaks = 50, xlab = "SSDO",  main = "")
+hist(Results$SD[1001:3000,3], breaks = 50, xlab = "SSDO",  main = "")
+
+dev.off()
 
 
 ###########################Convergence plots####################################
@@ -237,8 +270,34 @@ plot.ts(B[,1:5], main="", xlab = c("Iteration"), axes = F, panel = axis2)
 
 dev.off()
 
+png("Pointing North Data/ConvergenceBrunyeB1.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res= 1200)
+
+Y <- B[,1:5]
+
+axis2 <- function(Y, col = col, bg = bg, pch = pch, type = type, ...) {
+  lines(Y, col=col)
+  axis(side = 2, las = 1, at = c(round(mean(Y), 2), round(mean(Y)+sd(Y),2),round(mean(Y)-sd(Y),2)), cex.axis = 1)}
+
+plot.ts(B[,1:5], main="", xlab = c("Iteration"), axes = F, panel = axis2)
+
+dev.off()
+
 pdf("Pointing North Data/ConvergenceBrunyeB2.pdf", height = 5, width = 8,
     family = "CM Roman", pointsize = 12)
+
+Y <- B[,6:10]
+
+axis2 <- function(Y, col = col, bg = bg, pch = pch, type = type, ...) {
+  lines(Y, col=col)
+  axis(side = 2, las = 1, at = c(round(mean(Y), 2), round(mean(Y)+sd(Y),2),round(mean(Y)-sd(Y),2)), cex.axis = 1)}
+
+plot.ts(B[,6:10], main="", xlab = c("Iteration"), axes = F, panel = axis2)
+
+dev.off()
+
+png("Pointing North Data/ConvergenceBrunyeB2.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
 
 Y <- B[,6:10]
 
@@ -291,9 +350,36 @@ points(axval,
 
 dev.off()
 
+png("Pointing North Data/FigurelineSBSODreal.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
+
+plot(Xreal, PredCircreal*(180/pi), ylim = c(-200,200), type = "l", xlab = "SBSOD",
+     ylab = "Pointing Error", bty = 'n', yaxt = "n", xaxt = "n")
+axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
+     labels = c(seq(-3, 3, by = 1)), las = 2)
+axis(2, xaxp = c(-180, 0,180), at = c(seq(-180, 180, by = 60)),
+     labels = c(seq(-180, 180, by = 60)), las = 2)
+points(North$SBSOD, North$theta*(180/pi), cex=0.5)
+points(axval,
+       atan2(modeslin[6] + modeslin[10]*axval,
+             modeslin[1] + modeslin[5]*axval)*(180/pi),
+       pch = 0)
+
+dev.off()
 
 pdf("Pointing North Data/FigureConcentrationSBSODreal.pdf", height = 5, width = 8,
     family = "CM Roman", pointsize = 12)
+plot(Xreal, Concentrationreal, type = "l", xlab = "SBSOD",ylab = "Concentration",
+     bty = 'n', yaxt = "n", xaxt = "n")
+axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
+     labels = c(seq(-3, 3, by = 1)), las = 2)
+axis(2, xaxp = c(0, 0.5,1), at = c(seq(0, 1, by = 0.05)),
+     labels = c(seq(0, 1, by = 0.05)), las = 2)
+points(axval, Concentrationax, pch = 0)
+dev.off()
+
+png("Pointing North Data/FigureConcentrationSBSODreal.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
 plot(Xreal, Concentrationreal, type = "l", xlab = "SBSOD",ylab = "Concentration",
      bty = 'n', yaxt = "n", xaxt = "n")
 axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
@@ -343,9 +429,37 @@ points(axval,
 
 dev.off()
 
+png("Pointing North Data/FigurelineAgereal.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
+
+plot(Xreal, PredCircreal*(180/pi), ylim = c(-200,200), type = "l", xlab = "Age",
+     ylab = "Pointing Error", bty = 'n', yaxt = "n", xaxt = "n")
+axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
+     labels = c(seq(-3, 3, by = 1)), las = 2)
+axis(2, xaxp = c(-180, 0,180), at = c(seq(-180, 180, by = 60)),
+     labels = c(seq(-180, 180, by = 60)), las = 2)
+points(North$SBSOD, North$theta*(180/pi), cex=0.5)
+points(axval,
+       atan2(modeslin[6] + modeslin[7]*axval,
+             modeslin[1] + modeslin[2]*axval)*(180/pi),
+       pch = 0)
+
+dev.off()
+
 
 pdf("Pointing North Data/FigureConcentrationAgereal.pdf", height = 5, width = 8,
     family = "CM Roman", pointsize = 12)
+plot(Xreal, Concentrationreal, type = "l", xlab = "Age",ylab = "Concentration",
+     bty = 'n', yaxt = "n", xaxt = "n")
+axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
+     labels = c(seq(-3, 3, by = 1)), las = 2)
+axis(2, xaxp = c(0, 0.5,1), at = c(seq(0, 1, by = 0.05)),
+     labels = c(seq(0, 1, by = 0.05)), las = 2)
+points(axval, Concentrationax, pch = 0)
+dev.off()
+
+png("Pointing North Data/FigureConcentrationAgereal.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
 plot(Xreal, Concentrationreal, type = "l", xlab = "Age",ylab = "Concentration",
      bty = 'n', yaxt = "n", xaxt = "n")
 axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
@@ -395,9 +509,36 @@ points(axval,
 
 dev.off()
 
+png("Pointing North Data/FigurelineExpreal.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
+
+plot(Xreal, PredCircreal*(180/pi), ylim = c(-200,200), type = "l", xlab = "Experience",
+     ylab = "Pointing Error", bty = 'n', yaxt = "n", xaxt = "n")
+axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
+     labels = c(seq(-3, 3, by = 1)), las = 2)
+axis(2, xaxp = c(-180, 0,180), at = c(seq(-180, 180, by = 60)),
+     labels = c(seq(-180, 180, by = 60)), las = 2)
+points(North$SBSOD, North$theta*(180/pi), cex=0.5)
+points(axval,
+       atan2(modeslin[6] + modeslin[9]*axval,
+             modeslin[1] + modeslin[4]*axval)*(180/pi),
+       pch = 0)
+
+dev.off()
 
 pdf("Pointing North Data/FigureConcentrationExpreal.pdf", height = 5, width = 8,
     family = "CM Roman", pointsize = 12)
+plot(Xreal, Concentrationreal, type = "l", xlab = "Experience",ylab = "Concentration",
+     bty = 'n', yaxt = "n", xaxt = "n")
+axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
+     labels = c(seq(-3, 3, by = 1)), las = 2)
+axis(2, xaxp = c(0, 0.5,1), at = c(seq(0, 1, by = 0.05)),
+     labels = c(seq(0, 1, by = 0.05)), las = 2)
+points(axval, Concentrationax, pch = 0)
+dev.off()
+
+png("Pointing North Data/FigureConcentrationExpreal.png", height = 5, width = 8,
+    family = "LM Roman 10", units = "in", pointsize = 12, res = 1200)
 plot(Xreal, Concentrationreal, type = "l", xlab = "Experience",ylab = "Concentration",
      bty = 'n', yaxt = "n", xaxt = "n")
 axis(1, xaxp = c(-3, 0, 3), at = c(seq(-3, 3, by = 1)),
