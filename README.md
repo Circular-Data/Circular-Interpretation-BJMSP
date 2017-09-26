@@ -1,13 +1,14 @@
 # Circular-Interpretation-BJMSP
-Data archive for the paper: Circular Interpretation of projected normal regression coefficients
+Data archive for the paper: Circular Interpretation of regression coefficients
 
 This repository contains all code and supplementary material for the paper:
 
-Circular Interpretation of projected normal regression coefficients. 
+Cremers, J, Mulder, K.T. & Klugkist, I. (In press). Circular Interpretation of regression coefficients.
+British Journal of Mathematical and Statistical Psychology. doi: 10.1111/bmsp.12108
 
 The folder:
 	
-	-Manuscript includes the final manuscript and all figures used in the manuscript.
+	-Manuscript includes all figures used in the manuscript.
 	 Note that not all figure code is contained in this folder. For some figures code can be 
 	 found in other folders.
 	 
