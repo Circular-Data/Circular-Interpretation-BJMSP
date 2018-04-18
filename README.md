@@ -3,8 +3,8 @@ Data archive for the paper: Circular Interpretation of regression coefficients
 
 This repository contains all code and supplementary material for the paper:
 
-Cremers, J, Mulder, K.T. & Klugkist, I. (In press). Circular Interpretation of regression coefficients.
-British Journal of Mathematical and Statistical Psychology. doi: 10.1111/bmsp.12108
+Cremers, J, Mulder, K.T. & Klugkist, I. (2018). Circular Interpretation of regression coefficients.
+*British Journal of Mathematical and Statistical Psychology*, *71*(1), 75-95. doi: 10.1111/bmsp.12108
 
 The folder:
 	
